@@ -11,8 +11,8 @@ import org.slf4j.{Logger, LoggerFactory}
 
 class BasicAuthMTAuthenticator @Inject() (systemConfig:Config) extends Authenticator {
   private val logger = LoggerFactory.getLogger(classOf[BasicAuthMTAuthenticator])
-  private val passwdFileName:String = systemConfig.get("basicauth_mt.passwd_file", classOf[String])
-  private val userMapFileName:String = systemConfig.get("basicauth_mt.user_map_file", classOf[String])
+  private val passwdFileName:String = systemConfig.get("plugins.basic_auth_mt.passwd_file", classOf[String])
+  private val userMapFileName:String = systemConfig.get("plugins.basic_auth_mt.user_map_file", classOf[String])
   private val dao:BasicAuthDAO = new BasicAuthFileDAO(toPath(passwdFileName),toPath(userMapFileName))
 
   override def authenticate(requestContext: ContainerRequestContext): Authenticator.Result = {
