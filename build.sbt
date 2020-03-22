@@ -21,8 +21,8 @@ lazy val root = (project in file("."))
     name := "digdag-basic-auth-mt",
     libraryDependencies ++= Seq(
       "org.scala-lang.modules" %% "scala-collection-compat" % "2.1.4",
-      "io.digdag" % "digdag-spi" % "0.9.41", //% "provided",
-      "org.slf4j" % "slf4j-api" % "1.7.21",  //% "provided",
+      "io.digdag" % "digdag-spi" % "0.9.41" % "provided",
+      "org.slf4j" % "slf4j-api" % "1.7.21" % "provided",
       "commons-codec" % "commons-codec" % "1.14",
       "org.wvlet.airframe" %% "airspec" % airframeVersion % "test",
       scalaTest % Test

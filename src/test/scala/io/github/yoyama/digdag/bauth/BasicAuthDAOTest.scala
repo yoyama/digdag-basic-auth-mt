@@ -24,4 +24,12 @@ class BasicAuthFileDAOTest extends AirSpec {
         assert(dao.checkPasswd("test", "$apr1$26Vr1CPR$ELl2eTQuvHR.6y9XSy8v10"))
         assert(!dao.checkPasswd("hoge", "$apr1$26Vr1CPR$ELl2eTQuvHR.6y9XSy8v10"))
     }
+
+    def parseAuthorizationHeaderTest() = {
+        val d = "Basic eW95YW1hOnRlc3Q="
+        val x = dao.parseAuthorizationHeader(Some(d))
+        assert(x.isDefined)
+        assert(x.get._1 == "yoyama")
+        assert(x.get._2 == "test")
+    }
 }

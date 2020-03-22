@@ -5,6 +5,7 @@ import java.nio.file.{Files, Path}
 import java.util.Base64
 
 import org.apache.commons.codec.digest.Md5Crypt
+import org.slf4j.LoggerFactory
 
 case class UserInfo(user:String, passwd:String, siteId:Int, admin:Boolean)
 trait BasicAuthDAO {
@@ -12,13 +13,24 @@ trait BasicAuthDAO {
 }
 
 class BasicAuthFileDAO(val passwdFile:Path, val userMapFile:Path) extends BasicAuthDAO {
+  private val logger = LoggerFactory.getLogger(classOf[BasicAuthMTAuthenticator])
+
   val UTF8 = Charset.forName("UTF-8")
   val userInfo:Map[String, UserInfo] = readUserInfo(passwdFile, userMapFile)
+  logger.debug(s"user information records: ${userInfo.size}")
 
   override def authorize(authHeader: Option[String]): Option[UserInfo] = {
     parseAuthorizationHeader(authHeader)
       .flatMap(u => userInfo.get(u._1).map(x=>(x, u._2))) // Option(UserInfo, passwd)
-      .flatMap(u => if(checkPasswd(u._2, u._1.passwd)) Some(u._1) else None)
+      .flatMap(u => {
+        if(checkPasswd(u._2, u._1.passwd)) {
+          Some(u._1)
+        }
+        else {
+          logger.debug("Password not match")
+          None
+        }
+      })
   }
 
   def checkPasswd(rawPasswd:String, encPasswd:String):Boolean = {
@@ -37,14 +49,21 @@ class BasicAuthFileDAO(val passwdFile:Path, val userMapFile:Path) extends BasicA
 
   // Parse Authorization header.
   def parseAuthorizationHeader(header:Option[String]): Option[(String,String)] = {
-    val baRegex = """Basic¥s+(¥S+)""".r
+    val baRegex = """Basic\s+(.*)""".r
     header match {
       case Some(baRegex(v)) => {
         val h = new String(Base64.getDecoder.decode(v.getBytes(UTF8)))
         val ar = h.split(":", 2)
-        if(ar.size == 2) Some((ar(0), ar(1))) else None
+        if(ar.size == 2) Some((ar(0), ar(1)))
+        else {
+          logger.debug("Invalid basic auth header value.")
+          None
+        }
       }
-      case _ => None
+      case _ => {
+        logger.debug(s"Not basic auth header: $header")
+        None
+      }
     }
   }
 
