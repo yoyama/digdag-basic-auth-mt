@@ -5,7 +5,7 @@ Multi tenant basic authentication plugin for Digdag.
 
 ## Install
 
-### Server configuraitotn
+### Server configuration
 ```
 server.authenticator-class=io.github.yoyama.digdag.bauth.BasicAuthMTAuthenticator
 system-plugin.repositories=https://dl.bintray.com/yoyama/maven
