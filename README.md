@@ -3,7 +3,7 @@
 
 Multi tenant basic authentication plugin for Digdag.
 
-## Insatll
+## Install
 
 ### Server configuraitotn
 ```
