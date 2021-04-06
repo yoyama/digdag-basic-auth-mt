@@ -12,7 +12,7 @@ server.authenticator.type = basic_mt
 system-plugin.repositories=https://dl.bintray.com/yoyama/maven
 system-plugin.dependencies=io.github.yoyama:digdag-basic-auth-mt_2.13:0.2.0
 plugins.basic_auth_mt.passwd_file=<path_to_passwrwd_file>
-plugins.basic_auth_mt.user_map_file=<path_to_user_map_fiel>
+plugins.basic_auth_mt.user_map_file=<path_to_user_map_file>
 ```
 
 ### Server configuratoon for Digdag v0.9
@@ -21,7 +21,7 @@ server.authenticator-class=io.github.yoyama.digdag.bauth.BasicAuthMTAuthenticato
 system-plugin.repositories=https://dl.bintray.com/yoyama/maven
 system-plugin.dependencies=io.github.yoyama:digdag-basic-auth-mt_2.13:0.2.0
 plugins.basic_auth_mt.passwd_file=<path_to_passwrwd_file>
-plugins.basic_auth_mt.user_map_file=<path_to_user_map_fiel>
+plugins.basic_auth_mt.user_map_file=<path_to_user_map_file>
 ```
 
 ### Password file
