@@ -4,7 +4,6 @@
 Multi tenant basic authentication plugin for Digdag.
 
 ## Install
-
 ### Server configuration for Digdag v0.10.0
 From Digdag `v0.10.0` authentication is set with `server.authenticator.type`.
 ```
@@ -15,7 +14,7 @@ plugins.basic_auth_mt.passwd_file=<path_to_passwrwd_file>
 plugins.basic_auth_mt.user_map_file=<path_to_user_map_fiel>
 ```
 
-### Server configuratoon for Digdag v0.9
+### Server configuration for Digdag v0.9
 ```
 server.authenticator-class=io.github.yoyama.digdag.bauth.BasicAuthMTAuthenticator
 system-plugin.repositories=https://dl.bintray.com/yoyama/maven
