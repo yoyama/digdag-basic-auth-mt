@@ -1,5 +1,5 @@
 ThisBuild / scalaVersion     := scalaLangVersion
-ThisBuild / version          := "0.1.0"
+ThisBuild / version          := "0.2.0"
 ThisBuild / organization     := "io.github.yoyama"
 ThisBuild / organizationName := "yoyama"
 ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature")
@@ -12,16 +12,20 @@ ThisBuild / resolvers ++= Seq(
   "digdag-snapshots" at "https://dl.bintray.com/digdag/maven-snapshots",
 )
 
-lazy val airframeVersion = "20.3.1"
-lazy val scalaLangVersion = "2.12.10"
+ThisBuild / publishConfiguration := publishConfiguration.value.withOverwrite(true)
+ThisBuild / publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
+ThisBuild / publishTo := Some(MavenCache("local-maven", file("~/.m2/repository")))
+
+lazy val airframeVersion = "21.1.0"
+lazy val scalaLangVersion = "2.13.4"
 
 lazy val root = (project in file("."))
   .settings(
     name := "digdag-basic-auth-mt",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaLangVersion,
-      "org.scala-lang.modules" %% "scala-collection-compat" % "2.1.4",
-      "io.digdag" % "digdag-spi" % "0.9.41" % "provided",
+      "org.scala-lang.modules" %% "scala-collection-compat" % "2.4.0",
+      "io.digdag" % "digdag-spi" % "0.10.0" % "provided",
       "org.slf4j" % "slf4j-api" % "1.7.21" % "provided",
       "commons-codec" % "commons-codec" % "1.14",
       "org.wvlet.airframe" %% "airspec" % airframeVersion % "test"

@@ -1,15 +1,24 @@
 # digdag-basic-auth-mt
-[ ![Download](https://api.bintray.com/packages/yoyama/maven/digdag-basic-auth-mt/images/download.svg?version=0.1.0) ](https://bintray.com/yoyama/maven/digdag-basic-auth-mt/0.1.0/link)
+[ ![Download](https://api.bintray.com/packages/yoyama/maven/digdag-basic-auth-mt/images/download.svg?version=0.2.0) ](https://bintray.com/yoyama/maven/digdag-basic-auth-mt/0.2.0/link)
 
 Multi tenant basic authentication plugin for Digdag.
 
 ## Install
+### Server configuration for Digdag v0.10.0
+From Digdag `v0.10.0` authentication is set with `server.authenticator.type`.
+```
+server.authenticator.type = basic_mt
+system-plugin.repositories=https://dl.bintray.com/yoyama/maven
+system-plugin.dependencies=io.github.yoyama:digdag-basic-auth-mt_2.13:0.2.0
+plugins.basic_auth_mt.passwd_file=<path_to_passwrwd_file>
+plugins.basic_auth_mt.user_map_file=<path_to_user_map_fiel>
+```
 
-### Server configuration
+### Server configuration for Digdag v0.9
 ```
 server.authenticator-class=io.github.yoyama.digdag.bauth.BasicAuthMTAuthenticator
 system-plugin.repositories=https://dl.bintray.com/yoyama/maven
-system-plugin.dependencies=io.github.yoyama:digdag-basic-auth-mt_2.12:0.1.0
+system-plugin.dependencies=io.github.yoyama:digdag-basic-auth-mt_2.13:0.2.0
 plugins.basic_auth_mt.passwd_file=<path_to_passwrwd_file>
 plugins.basic_auth_mt.user_map_file=<path_to_user_map_fiel>
 ```
